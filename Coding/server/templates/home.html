@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Academic Wizard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🧙‍♂️ Academic Wizard</h1>
+
+        <div class="card">
+            <h2>I am a Tutor</h2>
+            <p>Register yourself to help students.</p>
+            <form action="/add_tutor" method="POST">
+                <input type="text" name="name" placeholder="Your Name (e.g. Mr. Jones)" required>
+                <input type="text" name="subject" placeholder="Subject (e.g. Maths)" required>
+                <button type="submit">Register as Tutor</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <div class="card">
+            <h2>I am a Student</h2>
+            <p>Book a session with an existing tutor.</p>
+            <form action="/book_session" method="POST">
+                <input type="text" name="student_name" placeholder="Your Name" required>
+                <select name="tutor_id" required>
+                    <option value="" disabled selected>Select a Tutor...</option>
+                    {% for tutor in tutors %}
+                        <option value="{{ tutor.id }}">{{ tutor.name }} - {{ tutor.subject }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Book Session</button>
+            </form>
+        </div>
+
+        <div class="list-section">
+            <h3>📅 Current Bookings</h3>
+            <ul>
+                {% for booking in bookings %}
+                    <li><strong>{{ booking.student_name }}</strong> is seeing <strong>{{ booking.tutor_name }}</strong></li>
+                {% else %}
+                    <li>No bookings yet. Be the first!</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
