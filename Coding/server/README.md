@@ -1,7 +1,7 @@
 # Academic Wizard - Tutoring Booking System
 
 ## Overview
-A web-based booking system for students to schedule sessions with tutors. 
+A growing academic skills and tutoring company offering online and in- person tutoring services. Specializing in helping students aged 10-18 improve their study  skills, exam preparation, and subject-specific knowledge (Maths, English, Science). 
 Built using **Python (Flask)** for the backend/frontend and **MySQL (TiDB Cloud)** for the database.
 
 ## Prerequisites
