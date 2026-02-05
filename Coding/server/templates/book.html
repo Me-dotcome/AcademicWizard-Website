@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book a Session - Academic Wizard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🧙‍♂️ Academic Wizard</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/book" style="color: #646cff;">Book a session</a> <a href="/resources">Resources</a>
+            <a href="/admin">Admin</a>
+            <a href="/help">Help & FAQ</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>📚 Book a Session</h1>
+
+        <div class="card registration-card" style="margin: 0 auto 30px auto;">
+            <h2>I am a Student</h2>
+            <p>Book a session with an existing tutor.</p>
+            <form action="/book_session" method="POST">
+                <input type="text" name="student_name" placeholder="Your User ID" required>
+                
+                <select name="tutor_id" required style="padding: 12px; width: 100%; border: 1px solid #ccc; border-radius: 5px;">
+                    <option value="" disabled selected>Select a Tutor...</option>
+                    {% for tutor in tutors %}
+                        <option value="{{ tutor.id }}">{{ tutor.name }} - {{ tutor.subject }}</option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit">Book Session</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <div class="list-section" style="max-width: 600px; margin: 20px auto;">
+            <h3>📅 Current Bookings</h3>
+            <ul>
+                {% for booking in bookings %}
+                    <li><strong>{{ booking.student_name }}</strong> is seeing <strong>{{ booking.tutor_name }}</strong></li>
+                {% else %}
+                    <li>No bookings yet. Be the first!</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -42,6 +42,19 @@ def home():
     all_tutors = Tutor.query.all()
     return render_template('home.html', tutors=all_tutors)
 
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
+@app.route('/book')
+def book():
+    # Fetch the data needed for this page
+    # Use SQLAlchemy queries to get tutors and bookings
+    all_tutors = Tutor.query.all()
+    all_bookings = Booking.query.all()
+    
+    return render_template('book.html', tutors=all_tutors, bookings=all_bookings)
+
 @app.route('/book', methods=['POST'])
 def book_session():
     # Get data from the form

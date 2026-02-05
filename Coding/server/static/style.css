@@ -13,6 +13,10 @@ body {
   color: var(--text);
 }
 
+h1 {
+  margin-left: 35px;
+}
+
 .app-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -33,6 +37,20 @@ body {
   font-weight: bold;
   font-size: 1.5rem;
   color: var(--primary);
+}
+
+/* Navigation Links Styling */
+.nav-links a {
+  text-decoration: none; /* Removes the underline */
+  color: var(--text);
+  font-size: 1rem;
+  margin-left: 20px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary); /* Turns purple on hover */
 }
 
 .nav-links button {
@@ -67,13 +85,225 @@ body {
   justify-content: center;
 }
 
+/* --- HERO SLIDER SECTION --- */
+
+/* The Main Container */
+.slider {
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* Controls how wide the banner gets */
+    height: 350px;    /* Fixed height for the banner */
+    margin: 30px auto; /* Centers the block on the page */
+    
+    /* Wizard Theme Gradient */
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); 
+    
+    border-radius: 20px;
+    overflow: hidden; /* Clips content to the rounded corners */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    color: white;
+}
+
+/* Individual Slides */
+.slider .slide {
+    position: absolute; /* Stacks them on top of each other */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Centering the Text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    box-sizing: border-box;
+
+    /* Animation: Hidden by default */
+    opacity: 0;
+    transform: translateY(20px); /* Starts slightly lower */
+    transition: all 0.8s ease-in-out;
+}
+
+/* The 'Active' class makes the slide visible */
+.slider .slide.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Typography */
+.slider h2 {
+    font-size: 2.8rem;
+    margin: 0 0 15px 0;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.slider p {
+    font-size: 1.3rem;
+    max-width: 600px;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
 .card {
   background: white;
   padding: 20px;
   border-radius: 12px;
-  min-width: 150px;
+  border: 1px solid #ccc;
+  margin: 10px;
+  max-width: 300px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Layout Wrapper */
+.split-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px; /* Space between the form and testimonials */
+    align-items: center; /* Vertically center the form */
+    margin: 20px auto;
+    max-width: 1100px;
+    padding: 0 20px;
+}
+
+/* Left Side: Registration Card Adjustments */
+.registration-card {
+    flex: 1;
+    min-width: 500px;
+    margin: 0;
+    min-height: 400px;
+}
+
+/* Target the form inside the registration card */
+.registration-card form {
+    display: flex;           /* Turns on Flexbox */
+    flex-direction: column;  /* Stacks items vertically */
+    gap: 15px;              /* Adds space between every input */
+}
+
+/* Make the inputs look nice and wide */
+.registration-card input {
+    width: 100%;             /* Fills the width of the card */
+    padding: 12px;           /* Adds comfortable typing space */
+    box-sizing: border-box;  /* Ensures padding doesn't break layout */
+    border: 1px solid #ccc;
+    border-radius: 5px;      /* Slight curve on the corners */
+}
+
+/* Make the buttons fill the width too */
+.registration-card button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+/* Right Side: The Column for Testimonials */
+.testimonial-column {
+    flex: 1; /* Takes up the other half of the screen */
+    min-width: 300px;
+    display: flex;
+    flex-direction: column; /* Stacks them vertically */
+    gap: 20px; /* Space between the bubbles */
+}
+
+/* Common Style for All Testimonial Boxes */
+.testimonial-box {
+    background: white;
+    padding: 10px 20px;
+    border-radius: 20px; /* Rounded corners like the sketch */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+    max-width: 70%;
+    position: relative;
+    margin-bottom: 5px; /* Adds a tiny gap between the vertical stacking */
+}
+
+/* --- THE ZIGZAG EFFECT --- */
+
+/* BOX 1: Floats Right, Small Width */
+.box-1 {
+    align-self: flex-end;      /* Pushes it to the Right */
+    min-width: 300px;
+    max-width: 300px;            /* Shorter length than box-3 */
+    min-height: 100px;
+    max-height: 100px;
+    text-align: left;         /* Text aligns left */
+    border-left: 5px solid #646cff; /* Accent line on the right */
+}
+
+/* BOX 2: Floats Left, Medium Width */
+.box-2 {
+    align-self: flex-start;    /* Pushes it to the Left */
+    min-width: 320px;
+    max-width: 320px;            /* Medium length */
+    min-height: 100px;
+    max-height: 100px;
+    text-align: right;          /* Text aligns right */
+    border-right: 5px solid #ff64d8; /* Accent line on the right */
+}
+
+/* BOX 3: Floats Right, Large Width */
+.box-3 {
+    align-self: flex-end;      /* Pushes it to the Right */
+    min-width: 370px;
+    max-width: 370px;            /* Long length (Bigger than Box 1) */
+    min-height: 100px;
+    max-height: 100px;
+    text-align: left;         /* Text aligns left */
+    border-left: 5px solid #64ffda; /* Accent line on the left */
+}
+
+/* 1. Base Animation Settings (The Engine) */
+.box-content {
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+    opacity: 1;
+    transform: translateX(0); /* Default position */
+}
+
+/* --- 2. Staggered Entrance (The Waterfall Effect) --- */
+/* This makes them wait their turn before appearing */
+
+/* Box 1 appears immediately */
+.box-1 .box-content {
+    transition-delay: 0s; 
+}
+
+/* Box 2 waits 0.3 seconds */
+.box-2 .box-content {
+    transition-delay: 0.3s; 
+}
+
+/* Box 3 waits 0.6 seconds */
+.box-3 .box-content {
+    transition-delay: 0.6s; 
+}
+
+/* --- 3. The "Exit" Directions (Opposing Motion) --- */
+/* Note: We use !important on delay to force them to leave INSTANTLY together */
+
+/* Box 2 slides LEFT when hiding */
+.box-2 .hide-content {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition-delay: 0s !important; /* No delay when leaving */
+}
+
+/* Box 1 & 3 slide RIGHT when hiding */
+.box-1 .hide-content, 
+.box-3 .hide-content {
+    opacity: 0;
+    transform: translateX(20px);
+    transition-delay: 0s !important; /* No delay when leaving */
+}
+
+.testimonial-column h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
 }
 
 /* Forms */
@@ -122,4 +352,15 @@ body {
     flex-direction: column;
     gap: 10px;
   }
+}
+
+/* Mobile Fix: On phone, make them all the same size */
+@media (max-width: 768px) {
+    .box-1, .box-2, .box-3 {
+        max-width: 100%;
+        align-self: stretch;
+        text-align: center;
+        border: none;
+        border-bottom: 4px solid #ccc;
+    }
 }

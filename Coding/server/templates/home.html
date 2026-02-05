@@ -5,46 +5,173 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>🧙‍♂️ Academic Wizard</h1>
+    <nav class="navbar">
+        <div class="logo">🧙‍♂️ Academic Wizard</div>
+        <div class="nav-links">
+            <a href="/book">Book a session</a>
+            <a href="/resources">Resources</a>
+            <a href="/admin">Admin</a>
+            <a href="/help">Help & FAQ</a>
+        </div>
+    </nav>
 
-        <div class="card">
-            <h2>I am a Tutor</h2>
-            <p>Register yourself to help students.</p>
-            <form action="/add_tutor" method="POST">
-                <input type="text" name="name" placeholder="Your Name (e.g. Mr. Jones)" required>
-                <input type="text" name="subject" placeholder="Subject (e.g. Maths)" required>
-                <button type="submit">Register as Tutor</button>
-            </form>
+    <div class="container">
+
+        <div class="slider" id="slider">
+            <div class="slide">
+                <h2>Find Your Perfect Tutor</h2>
+                <p>Connect with expert tutors in Maths, Physics, and more!</p>
+            </div>
+            <div class="slide">
+                <h2>Easy Booking System</h2>
+                <p>Book sessions with just a few clicks. No hassle, no stress!</p>
+            </div>
+            <div class="slide">
+                <h2>Safety and Success Oriented</h2>
+                <p>Our tutors are vetted for quality and expertise, and are DBS verified.</p>
+            </div>
+            <div class="slide">
+                <h2>Trusted by Students and Parents</h2>
+                <p>Join our community of successful learners today!</p>
+            </div>
         </div>
 
         <hr>
 
-        <div class="card">
-            <h2>I am a Student</h2>
-            <p>Book a session with an existing tutor.</p>
-            <form action="/book_session" method="POST">
-                <input type="text" name="student_name" placeholder="Your Name" required>
-                <select name="tutor_id" required>
-                    <option value="" disabled selected>Select a Tutor...</option>
-                    {% for tutor in tutors %}
-                        <option value="{{ tutor.id }}">{{ tutor.name }} - {{ tutor.subject }}</option>
-                    {% endfor %}
-                </select>
-                <button type="submit">Book Session</button>
-            </form>
+        <div class="split-container">
+    
+            <div class="card registration-card">
+                <h2>I am a Student/Parent</h2>
+                <p>Register yourself to find tutors.</p>
+                <form action="/add_student" method="POST">
+                    <input type="text" name="name" placeholder="Your Name..." required>
+                    <input type="text" name="subject" placeholder="Subject..." required>
+                    <input type="text" name="email" placeholder="Email Address..." required>
+                    <input type="text" name="phone_number" placeholder="Phone Number..." required>
+                    <button type="submit">Register as Student</button>
+                    <button type="submit">Register as Parent</button>
+                </form>
+            </div>
+
+            <div class="testimonial-column">
+                <h2>🌟 What Our Users Say</h2>
+                
+                <div class="testimonial-box box-1">
+                    <div class="box-content" id="t-content-1">
+                        <p class="quote">"Academic Wizard helped my son pass his Maths GCSE with flying colors!"</p>
+                        <p class="author">- Sarah J., Parent</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-box box-2">
+                    <div class="box-content" id="t-content-2">
+                        <p class="quote">"I was struggling with Physics, but finding a tutor here was so easy. Recommended!"</p>
+                        <p class="author">- Tom H., Student</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-box box-3">
+                    <div class="box-content" id="t-content-3">
+                        <p class="quote">"The booking system is super fast. I love seeing tutor reviews first before I make any decisions."</p>
+                        <p class="author">- Emily R., Student</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="list-section">
-            <h3>📅 Current Bookings</h3>
-            <ul>
-                {% for booking in bookings %}
-                    <li><strong>{{ booking.student_name }}</strong> is seeing <strong>{{ booking.tutor_name }}</strong></li>
-                {% else %}
-                    <li>No bookings yet. Be the first!</li>
-                {% endfor %}
-            </ul>
-        </div>
+        <hr>
+
     </div>
+    <script>
+        // Hero Slider Animation
+        const heroSlides = document.querySelectorAll('.slider .slide');
+        let heroIndex = 0;
+
+        // Show the first slide immediately
+        if(heroSlides.length > 0) {
+            heroSlides[0].classList.add('active');
+        }
+
+        setInterval(() => {
+            // Remove 'active' from current slide
+            heroSlides[heroIndex].classList.remove('active');
+
+            // Move to next slide
+            heroIndex++;
+            if (heroIndex >= heroSlides.length) {
+                heroIndex = 0;
+            }
+
+            // Add 'active' to new slide
+            heroSlides[heroIndex].classList.add('active');
+        }, 4000); // Changes every 4 seconds
+
+        // The Pool of 9 Testimonials (3 Original + 6 New)
+        const testimonials = [
+            // Batch 1 (Originals)
+            { quote: "\"Academic Wizard helped my son pass his Maths GCSE with flying colors!\"", author: "- Sarah J., Parent" },
+            { quote: "\"I was struggling with Physics, but finding a tutor here was so easy. Recommended!\"", author: "- Tom H., Student" },
+            { quote: "\"The booking system is super fast. I love seeing tutor reviews first before I make any decisions.\"", author: "- Emily R., Student" },
+            
+            // Batch 2 (New)
+            { quote: "\"My daughter went from a C to an A in Chemistry thanks to her tutor!\"", author: "- Karen M., Parent" },
+            { quote: "\"The whiteboard tool makes online lessons feel just like being in a classroom.\"", author: "- James L., Student" },
+            { quote: "\"Found a History tutor in minutes. The scheduling is so flexible.\"", author: "- David P., Student" },
+            
+            // Batch 3 (New)
+            { quote: "\"I was nervous about exams, but my tutor gave me the confidence I needed.\"", author: "- Sophie B., Student" },
+            { quote: "\"Great value for money. The quality of teaching is top-notch.\"", author: "- Mark T., Parent" },
+            { quote: "\"Helping my son organize his study schedule was a game changer.\"", author: "- Linda W., Parent" }
+        ];
+
+        let currentIndex = 0; // Start at the beginning
+
+        function cycleTestimonials() {
+            // 1. Identify the 3 boxes
+            const box1 = document.getElementById('t-content-1');
+            const box2 = document.getElementById('t-content-2');
+            const box3 = document.getElementById('t-content-3');
+            const boxes = [box1, box2, box3];
+
+            // 2. Fade OUT existing text
+            boxes.forEach(box => box.classList.add('hide-content'));
+
+            // 3. Wait 500ms (0.5s) for fade out to finish, then swap text
+            setTimeout(() => {
+                // Move index forward by 3 positions
+                currentIndex += 3;
+                // If we reach the end, loop back to 0
+                if (currentIndex >= testimonials.length) {
+                    currentIndex = 0;
+                }
+
+                // Update Box 1
+                box1.innerHTML = `
+                    <p class="quote">${testimonials[currentIndex].quote}</p>
+                    <p class="author">${testimonials[currentIndex].author}</p>
+                `;
+
+                // Update Box 2
+                box2.innerHTML = `
+                    <p class="quote">${testimonials[currentIndex + 1].quote}</p>
+                    <p class="author">${testimonials[currentIndex + 1].author}</p>
+                `;
+
+                // Update Box 3
+                box3.innerHTML = `
+                    <p class="quote">${testimonials[currentIndex + 2].quote}</p>
+                    <p class="author">${testimonials[currentIndex + 2].author}</p>
+                `;
+
+                // 4. Fade IN new text
+                boxes.forEach(box => box.classList.remove('hide-content'));
+
+            }, 1000); // Matches the CSS transition time
+        }
+
+        // Run this function every 10 seconds (10000ms)
+        setInterval(cycleTestimonials, 10000);
+    </script>
 </body>
 </html>

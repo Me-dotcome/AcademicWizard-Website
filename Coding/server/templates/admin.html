@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Academic Wizard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🧙‍♂️ Academic Wizard</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/book">Book a session</a>
+            <a href="/resources">Resources</a>
+            <a href="/admin" style="color: #646cff;">Admin</a> <a href="/help">Help & FAQ</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>🔧 Admin Panel</h1>
+
+        <div class="card registration-card" style="margin: 0 auto;">
+            <h2>I am a Tutor</h2>
+            <p>Register yourself to help students.</p>
+            <form action="/add_tutor" method="POST">
+                <input type="text" name="name" placeholder="Your Name (e.g. Mr. Jones)" required>
+                <input type="text" name="subject" placeholder="Subject (e.g. Maths)" required>
+                <button type="submit">Register as Tutor</button>
+            </form>
+        </div>
+        </div>
+
+</body>
+</html>
